@@ -6,31 +6,39 @@ ContractCallKit is a set of utility libraries that could be used to interact wit
 
 LibCaller (sol) algorithm: 
 
--1: function callFunctionParams(targetContract, functionName, paramsData)
--2:     success, returnData = targetContract.staticcall(abi.encodeWithSignature(functionName, paramsData))
--3:     if success:
--4:         return returnData
--5:     else:
--6:         revert("Call failed")
+       1: function callFunctionParams(targetContract, functionName, paramsData)
+
+       2:     success, returnData = targetContract.staticcall(abi.encodeWithSignature(functionName, paramsData))
+
+       3:     if success:
+
+       4:         return returnData
+
+       5:     else:
+
+       6:         revert("Call failed")
 
 staticcall function (sol) algorithm:
 
--1: function staticcall(address targetContract, bytes calldata data) external view returns (bool success, bytes memory returnData)
--2:     // Send a static call to the target contract with the provided data
--3:     result = targetContract.call(data)
--4:     
--5:     // Check if the call was successful
--6:     if result:
--7:         // Get the return data from the call
---8:         returnData = result.data
--9:         success = true
--10:    else:
--11:        // The call failed, set success to false
--12:        success = false
--13:        // Set returnData to an empty bytes array
--14:        returnData = bytes([])
--15:    end if
--16: end function
+       1: function staticcall(address targetContract, bytes calldata data) external view returns (bool success, bytes memory returnData)
+
+       2:     result = targetContract.call(data)
+
+       3:     if result:
+
+       4:         returnData = result.data
+
+       5:         success = true
+
+       6:    else:
+
+       7:        success = false
+
+       8:        returnData = bytes([])
+
+       9:    end if
+
+       10: end function
 
 **Contract Interaction Using `address.call()` in Ethereum Smart Contracts**
 
@@ -65,6 +73,8 @@ Given the dynamic nature of blockchain environments, interactions can fail due t
 `address.call()` is deliberately designed to operate within a confined execution context, devoid of persistent state changes in the target contract. Its primary application lies in querying data or interacting with functions marked as `view` or `pure`.
 
 In essence, `address.call()` provides a vital avenue for secure and controlled contract-to-contract communication on Ethereum. Its mechanics enable developers to obtain data from external contracts efficiently while adhering to the principles of gas efficiency and graceful error handling. Proper utilization of this function ensures the seamless integration of smart contracts within the Ethereum ecosystem.
+
+
 
 
 
